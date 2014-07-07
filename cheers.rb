@@ -10,6 +10,8 @@
 # Note: the “a” vs. “an”
 
 # P.S.: name.methods - Object.methods
+#puts Time.new
+require 'date'
 
 puts "What's your name?"
 name = gets.chomp
@@ -29,3 +31,15 @@ name.upcase.each_char do |char|
 end
 
 puts "#{name}'s just grand!"
+
+puts "Hey, #{name}, what's your birthday? (ex: MM/DD/YY)"
+bdayInput = gets.chomp
+birthday = Date.strptime(bdayInput.to_s, "%m/%d/%y")
+today = DateTime.now
+if birthday.yday < today.yday
+  birthday = Date.new(today.year + 1, birthday.month, birthday.day)
+else
+  birthday = Date.new(today.year, birthday.month, birthday.day)
+end
+days_until = (birthday - today).to_i + 1
+puts "Awesome! Your birthday is in #{days_until} days! Happy Birthday in advance!"
